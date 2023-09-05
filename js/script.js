@@ -96,10 +96,7 @@ window.addEventListener('DOMContentLoaded', () => {
    const modal = document.querySelector('.modal');
 
    modalTriggers.forEach((btn) => {
-      btn.addEventListener('click', () => {
-         modal.classList.add('show');
-         document.body.classList.add('no-scroll');
-      });
+      btn.addEventListener('click', openModal);
    });
 
    modalCloseBtn.addEventListener('click', closeModal);
@@ -116,8 +113,28 @@ window.addEventListener('DOMContentLoaded', () => {
       }
    });
 
+   const modalTimerId = setTimeout(openModal, 5000);
+
+   window.addEventListener('scroll', showModalByScroll);
+
+   function openModal() {
+      modal.classList.add('show');
+      document.body.classList.add('no-scroll');
+      clearInterval(modalTimerId);
+   }
+
    function closeModal() {
       modal.classList.remove('show');
       document.body.classList.remove('no-scroll');
+   }
+
+   function showModalByScroll() {
+      if (
+         window.scrollY + document.documentElement.clientHeight >=
+         document.documentElement.scrollHeight
+      ) {
+         openModal();
+         window.removeEventListener('scroll', showModalByScroll);
+      }
    }
 });
