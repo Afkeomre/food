@@ -250,11 +250,11 @@ window.addEventListener('DOMContentLoaded', () => {
             if (request.status === 200) {
                console.log(request.response);
                showThanksModal(message.success);
-               form.reset();
-               statusMessage.remove();
             } else {
                showThanksModal(message.failure);
             }
+            form.reset();
+            statusMessage.remove();
          });
       });
    }
