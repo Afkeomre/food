@@ -5,7 +5,7 @@ function openModal(modalSelector, modalTimerId) {
 
    console.log(modalTimerId);
    if (modalTimerId) {
-      clearInterval(modalTimerId);
+      clearTimeout(modalTimerId);
    }
 }
 
